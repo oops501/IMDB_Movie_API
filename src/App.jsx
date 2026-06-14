@@ -11,6 +11,7 @@ import { api } from "./config/axios";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage";
 import SelectedMovie from "./components/SelectedMovie";
+import NoMovie from "./components/NoMovie";
 
 const tempMovieData = [
   {
@@ -109,6 +110,7 @@ export default function App() {
       setError("");
       return;
     }
+
     handleCloseMovie();
     fetchMovie();
     return function () {
@@ -128,6 +130,7 @@ export default function App() {
           {!isLoading && !error && (
             <MovieList movies={movies} onSelectMovie={handleSelectedMovie} />
           )}
+          {query.length === 0 && <NoMovie />}
           {error && <ErrorMessage message={error} />}
         </Box>
         <Box>
